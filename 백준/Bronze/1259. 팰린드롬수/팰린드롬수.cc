@@ -1,4 +1,4 @@
-// #define is_same(x, y) (x^y) ? 0 : 1		// !is_same(s[i],s[len-1-i])
+#define not_same(x, y) (x^y) ? true : false
 #include <iostream>
 #include <string>
 using namespace std;
@@ -13,19 +13,18 @@ int main(void) {
 	while (getline(cin, s)) {
 		if (s[0] == '0') break;
 		
-		bool pal = true;
+		bool not_pal = false;
 		unsigned len = s.length();
 		unsigned mid = len / 2;
 		len -= 1;
 		for (unsigned i = 0; i < mid; i++) {
-			if (s[i] != s[len - i]) {
-				pal = false;
+			if (not_pal = not_same(s[i], s[len - i])) {
 				break;
 			}
 		}
 
-		if (pal) cout << "yes" << '\n';
-		else cout << "no" << '\n';
+		if (not_pal) cout << "no" << '\n';
+		else cout << "yes" << '\n';
 	}
 
 	return 0;
