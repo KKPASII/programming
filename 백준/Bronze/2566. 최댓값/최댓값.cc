@@ -8,7 +8,7 @@ int main(void) {
 	for (int i = 0; i < MAX; i++) {
 		for (int j = 0; j < MAX; j++) {
 			cin >>temp;
-			if (max <= temp) {
+			if (max < temp) {
 				max = temp; n = i; m = j;
 			}
 		}
