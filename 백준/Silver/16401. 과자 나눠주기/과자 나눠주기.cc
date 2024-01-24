@@ -6,10 +6,9 @@ int main() {
 	cin.tie(0); cout.tie(0); ios::sync_with_stdio(0);
 	int n, m, temp;
 	cin >> m >> n;
-	vector<int> snacks;
-	for (int c = 0; c < n; c++) {
-		cin >> temp; snacks.push_back(temp);
-	}
+	vector<int> snacks(n);
+	for (int c = 0; c < n; c++)
+		cin >> snacks[c];
 	int start = 1;
 	int end = *max_element(snacks.begin(), snacks.end());
 	int maxLen = 0, sum = 0;
