@@ -13,12 +13,11 @@ int main() {
     }
     for (auto& num : v) {
         isGood = true;
-        for (int i = 2; i <= sqrt(num); i++) {
+        for (int i = 2; i <= sqrt(num); i++)
             if (num % i == 0) {
                 isGood = false;
                 break;
             }
-        }
         if (num > 1 && isGood) cnt++;
     }
     cout << cnt;
