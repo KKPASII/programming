@@ -1,36 +1,30 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-
+int answer = 0;
 int main(void) {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	
-	int n, target, num, i, j;
-	int count = 0;
-
-	// 입력 받을 숫자 개수, 목표로 하는 숫자
-	cin >> n >> target;
-
-	vector<int> calSum(n + 1, 0);
-
-	// 숫자 입력 받고 계산
-	for (i = 1; i <= n; i++) {
-		cin >> num;
-		calSum[i] = calSum[i - 1] + num;	// 누적합 저장하기
-	}
-
-	// 경우의 수 계산
-	for (i = 1; i <= n; i++) {
-		for (j = i; j <= n; j++) {
-			if (calSum[j] - calSum[i - 1] == target) {
-				count++;
-				break;
-			}
+	ios::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+	int n, k;cin >> n >> k;
+	vector<int> v(n);
+	for (int t = 0; t < n; t++)
+		cin >> v[t];
+	int s = 0, e = 0, sum = v[0];
+	while (e < n) {
+		if (sum < k) {
+			e++;
+			if (e < n) sum += v[e];
+		}
+		else if (sum > k) {
+			sum -= v[s];
+			s++;
+		}
+		else if (sum == k) {
+			answer++;
+			sum -= v[s];
+			s++; e++; 
+			if (e < n) sum += v[e];
 		}
 	}
-
-	cout << count << '\n';
+	cout << answer;
 	return 0;
 }
