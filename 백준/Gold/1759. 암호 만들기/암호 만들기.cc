@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <string>
 using namespace std;
 int len, c;
 char str[15];
@@ -27,8 +26,7 @@ void dfs(int cur_len, int prev_idx) {
 }
 int main() {
 	ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	char tmp;
-	cin >> len >> c;
+	char tmp; cin >> len >> c;
 	for (int t = 0; t < c; t++) {
 		cin >> tmp; spells.push_back(tmp);
 	}
