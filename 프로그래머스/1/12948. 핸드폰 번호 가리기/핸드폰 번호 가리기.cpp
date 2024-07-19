@@ -4,14 +4,10 @@
 using namespace std;
 
 string solution(string phone_number) {
-    string answer = "";
-    int len = phone_number.length();
-    string visible_nums = phone_number.substr(len-4, 4);
-    len -= 4;
-    while (len > 0) {
-        answer += '*';
-        len--;
+    string answer = phone_number;
+    for (int i = 0; i < phone_number.length() - 4; i++) {
+        answer.replace(i, 1, "*");
     }
-    answer += visible_nums;
+    
     return answer;
 }
