@@ -1,6 +1,4 @@
 #include <iostream>
-#include <algorithm>
-#include <vector>
 using namespace std;
 #define SIZE 6
 int main() {
@@ -15,14 +13,9 @@ int main() {
 	}
 	cin >> t >> p;
 	for (int i = 0; i < SIZE; i++) {
-		int temp = size[i] / t;
-		if (temp == 0 && size[i] % t != 0) {
+		t_set += size[i] / t;
+		if (size[i] % t != 0) {
 			t_set++;
-		}
-		else {
-			t_set += temp;
-			if (size[i] % t != 0)
-				t_set += 1;
 		}
 	}
 	cout << t_set << '\n';
