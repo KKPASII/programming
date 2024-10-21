@@ -1,37 +1,35 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
-    int m, num;
+    int m, num, S = 0;
     string order;
-    vector<bool> set(21, false);
     cin >> m;
     for (int i = 0; i < m; i++) {
         cin >> order;
         if (order == "add") {
             cin >> num;
-            set[num] = true;
+            S |= (1 << (num - 1));
         }
         else if (order == "remove") {
             cin >> num;
-            set[num] = false;
+            S &= ~(1 << (num - 1));
         }
         else if (order == "check") {
             cin >> num;
-            cout << (set[num] ? 1 : 0) << '\n';
+            cout << ((S & (1 << (num - 1))) ? 1 : 0) << '\n';
         }
         else if (order == "toggle") {
             cin >> num;
-            set[num] = !set[num];
+            S ^= (1 << (num - 1));
         }
         else if (order == "all") {
-            set.assign(21, true);
+            S = (1 << 20) - 1;
         }
         else if (order == "empty") {
-            set.assign(21, false);
+            S = 0;
         }
     }
     return 0;
