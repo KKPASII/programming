@@ -13,7 +13,7 @@ public class Main {
         int startTeam = 0;
         int linkTeam = 0;
 
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < N-1; i++) {
             for (int j = i + 1; j < N; j++) {
                 if (selected[i] && selected[j]) {
                     startTeam += board[i][j] + board[j][i];
@@ -23,6 +23,7 @@ public class Main {
                 }
             }
         }
+
         int diff = Math.abs(startTeam - linkTeam);
         minDiff = Math.min(diff, minDiff);
     }
@@ -33,13 +34,13 @@ public class Main {
             return;
         }
 
-        if (idx >= N) return;
-
-        selected[idx] = true;
-        backtrack(idx+1, k+1);
-
-        selected[idx] = false;
-        backtrack(idx+1, k);
+        for (int i = idx; i < N; i++) {
+            if (!selected[i]) {
+                selected[i] = true;
+                backtrack(i + 1, k + 1);
+                selected[i] = false;
+            }
+        }
     }
 
     public static void main(String[] args) throws IOException {
@@ -49,12 +50,14 @@ public class Main {
         N = Integer.parseInt(str);
         board = new int[N][N];
         selected = new boolean[N];
+
         for (int i = 0; i < N; i++) {
             row = new StringTokenizer(br.readLine());
             for (int j = 0; j < N; j++) {
                 board[i][j] = Integer.parseInt(row.nextToken());
             }
         }
+
         backtrack(0, 0);
         System.out.println(minDiff);
     }
