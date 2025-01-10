@@ -8,30 +8,23 @@ public class Main {
     static int[][] board;
     static int n = 9;
     static List<int[]> blank;
-    static int[][] answer;
-    public static void saveBoard() {
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                answer[i][j] = board[i][j];
-            }
-        }
-    }
+    static boolean solved = false;
     public static void printBoard() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                System.out.print(answer[i][j] + " ");
+                System.out.print(board[i][j] + " ");
             }
             System.out.println();
         }
     }
     public static boolean checkRange(int curRow, int curCol, int num) {
         for (int col = 0; col < n; col++) {
-            if (col != curCol && board[curRow][col] == num) {
+            if (board[curRow][col] == num) {
                 return false;
             }
         }
         for (int row = 0; row < n; row++) {
-            if (row != curRow && board[row][curCol] == num) {
+            if (board[row][curCol] == num) {
                 return false;
             }
         }
@@ -39,7 +32,7 @@ public class Main {
         int bigCol = curCol / 3 * 3;
         for (int row = bigRow; row < bigRow+3; row++) {
             for (int col = bigCol; col < bigCol+3; col++) {
-                if (curRow != row && curCol != col && board[row][col] == num) {
+                if (board[row][col] == num) {
                     return false;
                 }
             }
@@ -47,14 +40,16 @@ public class Main {
         return true;
     }
     public static void dfs(int depth) {
+        if (solved) return;
         if (depth == blank.size()) {
-            saveBoard();
+            solved = true;
+            printBoard();
             return;
         }
         int row = blank.get(depth)[0];
         int col = blank.get(depth)[1];
         for (int num = 1; num <= 9; num++) {
-            if (checkRange(row, col, num)) {
+            if (!solved && checkRange(row, col, num)) {
                 board[row][col] = num;
                 dfs(depth + 1);
                 board[row][col] = 0;
@@ -65,7 +60,6 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         board = new int[n][n];
-        answer = new int[n][n];
         blank = new ArrayList<int[]>();
         for (int i = 0; i < n; i++) {
             String line = br.readLine();
@@ -78,6 +72,5 @@ public class Main {
             }
         }
         dfs(0);
-        printBoard();
     }
 }
