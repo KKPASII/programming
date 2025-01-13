@@ -7,11 +7,12 @@ public class Main {
     static int[] numSeq;
     static int n, s, cnt;
     public static void dfs(int idx, int sum) {
-        if (sum == s) cnt++;
-        if (idx == n) return;
-        for (int i = idx; i < n; i++) {
-            dfs(i + 1, sum + numSeq[i]);
+        if (idx == n) {
+            if (sum == s) cnt++;
+            return;
         }
+        dfs(idx+1, sum);
+        dfs(idx+1, sum + numSeq[idx]);
     }
 
     public static void main(String[] args) throws IOException {
