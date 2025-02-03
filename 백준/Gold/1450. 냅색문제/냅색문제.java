@@ -2,29 +2,21 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.StringTokenizer;
 
 public class Main {
     static int n, c;
-    static ArrayList<Long> getSubsetSums(int[] arr) {
-        ArrayList<Long> subsetSums = new ArrayList<>();
-        int len = arr.length;
-        for (int i = 0; i < (1 << len); i++) {
-            long sum = 0;
-            for (int j = 0; j < len; j++) {
-                if ((i & (1 << j)) != 0) {
-                    sum += arr[j];
-                    if (sum > c) {
-                        sum = -1;
-                        break;
-                    }
-                }
-            }
-            if (sum != -1) subsetSums.add(sum);
+    static ArrayList<Long> sum1 = new ArrayList<>();
+    static ArrayList<Long> sum2 = new ArrayList<>();
+
+    static void getSubsetSums(ArrayList<Long> arr, long sum, int idx,  ArrayList<Long> result) {
+        if (idx == arr.size()) {
+            result.add(sum);
+            return;
         }
-        return subsetSums;
+        getSubsetSums(arr,  sum, idx+1, result);
+        getSubsetSums(arr, sum + arr.get(idx),idx + 1, result);
     }
 
     static int search(ArrayList<Long> list, long key) {
@@ -47,17 +39,17 @@ public class Main {
 
         st = new StringTokenizer(br.readLine());
         int mid = n/2;
-        int[] w1 = new int[mid];
-        int[] w2 = new int[n-mid];
+        ArrayList<Long> w1 = new ArrayList<>();
+        ArrayList<Long> w2 = new ArrayList<>();
         for (int i = 0; i < mid; i++)
-            w1[i] = Integer.parseInt(st.nextToken());
+            w1.add(Long.parseLong(st.nextToken()));
         for (int i = 0; i < n-mid; i++)
-            w2[i] = Integer.parseInt(st.nextToken());
+            w2.add(Long.parseLong(st.nextToken()));
 
-        ArrayList<Long> sum1 = getSubsetSums(w1);
-        ArrayList<Long> sum2 = getSubsetSums(w2);
+        getSubsetSums(w1, 0, 0, sum1);
+        getSubsetSums(w2, 0, 0, sum2);
         Collections.sort(sum2);
-        
+
         long answer= 0;
         for (long s : sum1) {
             if (s > c) continue;
@@ -65,6 +57,7 @@ public class Main {
             long cnt = search(sum2, remaining);
             answer += cnt;
         }
+
         System.out.println(answer);
     }
 }
