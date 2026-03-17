@@ -24,8 +24,10 @@ public class Main {
             }
         }
 
+        StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= basket; i++) {
-            System.out.print(baskets[i] + " ");
+            sb.append(baskets[i]).append(' ');
         }
+        System.out.println(sb);
     }
 }
