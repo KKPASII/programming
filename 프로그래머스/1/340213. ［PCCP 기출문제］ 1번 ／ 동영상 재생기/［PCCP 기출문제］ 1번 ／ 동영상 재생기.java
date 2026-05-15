@@ -6,9 +6,8 @@ class Solution {
         int opStart = totalTime(op_start);
         int opEnd = totalTime(op_end);
         
-        if (opStart <= present && present <= opEnd) {
-            present = opEnd;
-        }
+        present = skip(opStart, present, opEnd);
+        
         for (String command : commands) {
             switch(command) {
                 case "prev":
@@ -16,25 +15,30 @@ class Solution {
                     if (present < 0) {
                         present = 0;
                     }
-                    System.out.println("after prev, present = " + present);
                     break;
                 case "next":
                     present += 10;
                     if (present > videoEnd) {
                         present = videoEnd;
                     }
-                    System.out.println("after next, present = " + present);
                     break;
                 default:
                     break;
             }
             
-            if (opStart <= present && present <= opEnd) {
-                present = opEnd;
-            }
+            present = skip(opStart, present, opEnd);
         }
+        
         answer = timeString(present);
         return answer;
+    }
+    
+    public int skip(int opStart, int present, int opEnd) {
+        if (opStart <= present && present <= opEnd) {
+            present = opEnd;
+        }
+        
+        return present;
     }
     
     public int totalTime(String timePos) {
@@ -47,6 +51,7 @@ class Solution {
     public String timeString(int totalTime) {
         int mm = totalTime / 60;
         int ss = totalTime % 60;
+        
         return String.format("%02d:%02d", mm, ss);
     }
 }
