@@ -3,7 +3,7 @@ class Solution {
         int m = 1234567;
         
         int[] step = new int[2001];
-        step[0] = 0;
+        step[0] = 1;
         step[1] = 1;
         step[2] = 2;
         
