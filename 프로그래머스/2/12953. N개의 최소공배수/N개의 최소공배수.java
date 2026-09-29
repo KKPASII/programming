@@ -1,6 +1,10 @@
 class Solution {
     public int solution(int[] arr) {
         
+        if (arr.length == 1) {
+            return arr[0];
+        }
+        
         int ans = lcm(arr[0], arr[1]);
         
         for (int i = 2; i < arr.length; i++) {
