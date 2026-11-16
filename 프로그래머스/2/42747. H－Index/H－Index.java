@@ -6,10 +6,10 @@ class Solution {
         Arrays.sort(citations);
         
         for (int i = 0; i < n; i++) {
-            int used = n - i;
+            int h = n - i;
             
-            if (citations[i] >= used) {
-                return used;
+            if (citations[i] >= h) {
+                return h;
             }
         }
         
