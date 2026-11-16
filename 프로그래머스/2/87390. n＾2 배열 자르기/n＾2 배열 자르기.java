@@ -7,7 +7,7 @@ class Solution {
         for (long i = left / n; i <= right / n; i++) {
             for (long j = 0; j < n; j++) {
                 long index = i * n + j;
-
+                
                 if (index < left) continue;
                 if (index > right) break;
 
