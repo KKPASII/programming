@@ -7,7 +7,6 @@ class Solution {
         
         for (int i = 0; i < n; i++) {
             int used = n - i;
-            int notUsed = i;
             
             if (citations[i] >= used) {
                 return used;
